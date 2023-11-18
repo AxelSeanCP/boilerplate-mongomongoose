@@ -1,0 +1,19 @@
+open MongoDB
+https://cloud.mongodb.com/v2/65574bc130f57b6f09e73174#/clusters
+
+My MongoDB - Axel Sean CP
+mongodb+srv://axelseancp:<password>@cluster0.reuweky.mongodb.net/?retryWrites=true&w=majority
+
+#2
+build a Schema, the syntax is similar to JSON
+
+#3 
+to create a document instance is similar to create a class instance in java
+after creating a document instance, always save 
+
+#4
+Model.create() takes an array of object in the first args and saves them into the database
+
+#5 
+Model.find() first args takes a json, for example if you want to search for the age then
+Model.find({age: 20}, callbackFunction);
