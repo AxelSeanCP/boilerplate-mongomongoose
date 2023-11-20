@@ -68,40 +68,72 @@ const findPeopleByName = (personName, done) => {
   })
 };
 
+// #6 use model.findOne() to return a single matching document from your database
 const findOneByFood = (food, done) => {
-  done(null /*, data*/);
+  Person.findOne({favoriteFoods: food}, (err,data) => {
+    if(err) return console.error(err);
+    done(null,data);
+  })
 };
 
+// #7 use model.findById() to search your database by _id
 const findPersonById = (personId, done) => {
-  done(null /*, data*/);
+  Person.findById({_id: personId}, (err,data) => {
+    if(err) return console.error(err);
+    done(null,data);
+  });
 };
 
+// #8 perform classic update by running find, edit, then save
 const findEditThenSave = (personId, done) => {
   const foodToAdd = "hamburger";
-
-  done(null /*, data*/);
+  Person.findById({_id: personId}, (err,data) => {
+    if(err) return console.error(err);
+    data.favoriteFoods.push(foodToAdd);
+    data.save((err,data) => {
+      if(err) return console.error(err);
+      done(null,data);
+    })
+  });
 };
 
+// #9 perform new updates on a document using model.findOneAndUpdate()
 const findAndUpdate = (personName, done) => {
   const ageToSet = 20;
-
-  done(null /*, data*/);
+  Person.findOneAndUpdate({name: personName}, {age: ageToSet}, {new: true}, (err,data) => {
+    if(err) return console.error(err);
+    done(null , data);
+  });
 };
 
+// #10 delete one document using model.findByIdAndRemove() / findOneAndRemove()
 const removeById = (personId, done) => {
-  done(null /*, data*/);
+  Person.findByIdAndRemove({_id: personId}, (err,data) => {
+    if(err) return console.error(err);
+    done(null,data);
+  });
 };
 
+// #11 delete many documents with model.remove()
 const removeManyPeople = (done) => {
   const nameToRemove = "Mary";
-
-  done(null /*, data*/);
+  Person.remove({name: nameToRemove}, (err,data) => {
+    if(err) return console.error(err);
+    done(null,data);
+  })
 };
 
+// #12 chain search query helpers to narrow search results
 const queryChain = (done) => {
   const foodToSearch = "burrito";
-
-  done(null /*, data*/);
+  Person.find({favoriteFoods: foodToSearch})
+        .sort('name')
+        .limit(2)
+        .select('-age')
+        .exec((err,data) => {
+          if(err) return console.error(err);
+          done(null,data)
+        });
 };
 
 /** **Well Done !!**
