@@ -2,7 +2,6 @@ require('dotenv').config();
 let mongoose = require('mongoose');
 
 // #1 connect to a MongooDB database
-process.env.MONGO_URI='mongodb+srv://axelseancp:YviXFwbmcJfCDu6O@cluster0.reuweky.mongodb.net/?retryWrites=true&w=majority';
 mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true })
 
 // #2 create a model
